@@ -1,6 +1,8 @@
 <?php
 $eredmeny = "";
+session_start();
 
+if (isset($_SESSION['felhasznalonev'])) {
 try {
 	$dbh = new PDO('mysql:host=localhost;dbname=feltalalokdb', 'feltalalokdb', 'UvegPohar111',array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION));
 	$dbh->query('SET NAMES utf8 COLLATE utf8_hungarian_ci');
@@ -68,5 +70,7 @@ catch (PDOException $e) {
 	$eredmeny = $e->getMessage();
 }
 echo $eredmeny;
-
+} else {
+	echo "Az oldal megtekintéséhez regisztrációra van szükség!";
+}
 ?>
